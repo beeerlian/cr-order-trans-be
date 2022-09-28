@@ -20,7 +20,11 @@ module.exports = (sequelize, Sequelize) => {
               },
               phone: {
                      type: Sequelize.DataTypes.INTEGER,
-              }
+              },
+              access_token: {
+                     type: Sequelize.DataTypes.STRING,
+                     allowNull: false
+              },
        });
        return User;
 }

@@ -1,4 +1,5 @@
 const user = require('./user.route')
+const item = require('./item.route')
 
 module.exports = function (app) {
        app.use(function (req, res, next) {
@@ -10,5 +11,6 @@ module.exports = function (app) {
        })
 
        user(app)
+       item(app)
 
 }

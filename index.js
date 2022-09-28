@@ -2,10 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const appRoute = require('./routes');
 const db = require('./models')
+const cors = require("cors");
 //sequilize
 db.sequelize.authenticate().then(() => {
        console.log('Connected to database');
-       db.sequelize.sync().then(() => {
+       db.sequelize.sync({ forced: true }).then(() => {
               console.log('Synced to database');
 
        }).catch((err) => {
@@ -16,8 +17,12 @@ db.sequelize.authenticate().then(() => {
 });
 
 //express
+var corsOptions = {
+       origin: "http://localhost"
+};
 const app = express();
 
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
