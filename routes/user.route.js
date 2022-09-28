@@ -1,8 +1,8 @@
-const user = require("../controllers/user.controller")
+const controller = require("../controllers")
 
 
-module.exports =  function (app) {
-       app.get('/user', user.getAll)
+module.exports = function (app) {
+       app.get('/user', controller.user.getAll)
 }
 
 
