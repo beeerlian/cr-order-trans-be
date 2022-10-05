@@ -6,16 +6,28 @@ module.exports = (sequelize, Sequelize) => {
                      type: Sequelize.DataTypes.STRING,
                      allowNull: false
               },
-              fee_per_day: {
+              price: {
                      type: Sequelize.DataTypes.STRING,
                      allowNull: false
               },
               status: {
-                     type: Sequelize.DataTypes.BOOLEAN,
+                     type: Sequelize.DataTypes.STRING,
                      allowNull: false,
-                     defaultValue: false
-              }
-       });
+              },
+              created_at: {
+                     type: 'TIMESTAMP',
+                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+                     allowNull: false
+              },
+              updated_at: {
+                     type: 'TIMESTAMP',
+                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+                     allowNull: false
+              },
+       },
+              {
+                     timestamps: false
+              });
        return Item;
 }
 
