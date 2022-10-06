@@ -1,7 +1,7 @@
 const db = require('../models')
-const User = db.user;
+const Transaction = db.transaction;
 exports.getAll = (req, res) => {
-       User.findAll()
+       Transaction.findAll()
               .then(data => {
                      res.status(200).send({
                             'success': true,
@@ -17,7 +17,7 @@ exports.getAll = (req, res) => {
 }
 
 exports.create = (req, res) => {
-       res.status(200).send('create user')
+       res.status(200).send('create trans')
 }
 
 

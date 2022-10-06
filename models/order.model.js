@@ -1,18 +1,19 @@
 
 
 module.exports = (sequelize, Sequelize) => {
-       const Item = sequelize.define("items", {
-              name: {
+       const Order = sequelize.define("orders", {
+              user_id: {
                      type: Sequelize.DataTypes.STRING,
                      allowNull: false
               },
-              price: {
+              item_id: {
                      type: Sequelize.DataTypes.STRING,
                      allowNull: false
               },
-              status: {
-                     type: Sequelize.DataTypes.STRING,
-                     allowNull: false,
+              order_date: {
+                     type: 'TIMESTAMP',
+                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+                     allowNull: false
               },
               created_at: {
                      type: 'TIMESTAMP',
@@ -28,7 +29,7 @@ module.exports = (sequelize, Sequelize) => {
               {
                      timestamps: false
               });
-       return Item;
+       return Order;
 }
 
 

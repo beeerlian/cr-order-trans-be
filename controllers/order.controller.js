@@ -1,7 +1,7 @@
 const db = require('../models')
-const Item = db.item;
+const Order = db.order;
 exports.getAll = (req, res) => {
-       Item.findAll()
+       Order.findAll()
               .then(data => {
                      res.status(200).send({
                             'success': true,
@@ -18,7 +18,7 @@ exports.getAll = (req, res) => {
 
 exports.create = (req, res) => {
 
-       Item.create({
+       Order.create({
               name: req.body.name,
               fee_per_day: req.body.fee_per_day,
        }).then(data => {

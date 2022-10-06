@@ -2,7 +2,7 @@ const controller = require("../controllers")
 
 
 module.exports = function (app) {
-       app.get('/user', controller.user.getAll)
+       app.get('/transaction', controller.transaction.getAll)
 }
 
 

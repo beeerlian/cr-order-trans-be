@@ -1,5 +1,5 @@
-const user = require('./user.route')
-const item = require('./item.route')
+const transaction = require('./transaction.route')
+const order = require('./order.route')
 
 module.exports = function (app) {
        app.use(function (req, res, next) {
@@ -10,7 +10,7 @@ module.exports = function (app) {
               next();
        })
 
-       user(app)
-       item(app)
+       transaction(app)
+       order(app)
 
 }

@@ -1,5 +1,5 @@
 const controller = {}
-controller.user = require('./user.controller')
-controller.item = require('./item.controller')
+controller.transaction = require('./transaction.controller')
+controller.order = require('./order.controller')
 
 module.exports = controller
