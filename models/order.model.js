@@ -10,6 +10,11 @@ module.exports = (sequelize, Sequelize) => {
                      type: Sequelize.DataTypes.STRING,
                      allowNull: false
               },
+              // order_status:{
+              //        type: Sequelize.DataTypes.STRING,
+              //        defaultValue : "",
+              //        allowNull: false
+              // },
               order_date: {
                      type: 'TIMESTAMP',
                      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),

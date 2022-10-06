@@ -11,25 +11,85 @@ exports.getAll = (req, res) => {
               .catch(err => {
                      res.status(500).send({
                             message:
-                                   err.message || "Some error occurred while retrieving tutorials."
+                                   err.message
                      });
               });
 }
 
-exports.create = (req, res) => {
+exports.get = (req, res) => {
+       const id = req.params.id;
+       Order.findByPk(id)
+              .then(data => {
+                     res.status(200).send({
+                            'success': true,
+                            data: data
+                     });
+              })
+              .catch(err => {
+                     res.status(500).send({
+                            message: err.message
+                     });
+              });
+}
 
-       Order.create({
-              name: req.body.name,
-              fee_per_day: req.body.fee_per_day,
-       }).then(data => {
+exports.update = (req, res) => {
+       const id = req.params.id;
+       Order.findByPk(id)
+              .then(data => {
+                     data.dataValues = { ...data.dataValues, ...req.body };
+                     data.save().then(data => {
+                            res.status(200).send({
+                                   'success': true,
+                                   data: data
+                            });
+                     })
+                            .catch(err => {
+                                   res.status(500).send({
+                                          message: err.message
+                                   });
+                            });
+              })
+              .catch(err => {
+                     res.status(500).send({
+                            message: err.message
+                     });
+              });
+}
+
+exports.delete = (req, res) => {
+       const id = req.params.id;
+       Order.findByPk(id)
+              .then(data => {
+
+                     data.destroy().then(data => {
+                            res.status(200).send({
+                                   'success': true,
+                                   data: data
+                            });
+                     })
+                            .catch(err => {
+                                   res.status(500).send({
+                                          message: err.message
+                                   });
+                            });
+              })
+              .catch(err => {
+                     res.status(500).send({
+                            message: err.message
+                     });
+              });
+}
+
+
+
+exports.create = (req, res) => {
+       Order.create(req.body).then(data => {
               res.status(200).send({
-                     'success': true,
                      data: data
               });
        }).catch(err => {
               res.status(500).send({
-                     message:
-                            err.message || "Some error occurred while retrieving tutorials."
+                     message: err.message
               });
        })
 }
