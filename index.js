@@ -18,7 +18,7 @@ db.sequelize.authenticate().then(() => {
 
 //express
 var corsOptions = {
-       origin: "http://localhost"
+       origin: "http://0.0.0.0/"
 };
 const app = express();
 
@@ -28,7 +28,9 @@ app.use(bodyParser.json())
 
 appRoute(app)
 
+const PORT = 8082;
+const HOST = "0.0.0.0";
 
-app.listen(8080, () => {
-       console.log('Server running at http://localhost:8080/');
+app.listen(PORT, HOST, () => {
+       console.log(`Server running at http://${HOST}:${PORT}/`);
 });
