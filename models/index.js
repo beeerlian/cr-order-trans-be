@@ -1,14 +1,17 @@
 const Sequelize = require("sequelize");
-const mysqlConfig = require("../databases/mysql.config");
+const pg = require('pg')
+require('dotenv').config()
 
 const db = {};
 
-const sequelize = new Sequelize(
-       mysqlConfig.DB,
-       mysqlConfig.USER,
-       mysqlConfig.PASSWORD,
-       mysqlConfig.HOST
-);
+const sequelize = new Sequelize(process.env.SUPABASE_URL, { dialectModule: pg })
+
+// const sequelize = new Sequelize(
+//        mysqlConfig.DB,
+//        mysqlConfig.USER,
+//        mysqlConfig.PASSWORD,
+//        mysqlConfig.HOST
+// );
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
