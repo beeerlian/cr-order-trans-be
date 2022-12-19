@@ -2,7 +2,8 @@
 
 
 module.exports = (date) => {
-       let rentDay = new Date(date)
+       console.log(parseInt(date))
+       let rentDay = new Date(parseInt(date))
        const currentDate = new Date();
        console.log(`${rentDay} - ${currentDate}`);
 

@@ -77,18 +77,18 @@ exports.delete = async (req, res) => {
 
 exports.create = async (req, res) => {
        try {
-              const id = req.body.order_id;
-              const order = await Order.findByPk(id);
-              if (!order) {
-                     throw new Error("the order you mean is not available")
-              }
-
-              const totalRentDay = util.countRentDuration(order.order_date);
-              console.log(order)
+              // const id = req.body.order_id;
+              // const order = await Order.findByPk(id);
+              // if (!order) {
+              //        throw new Error("the order you mean is not available")
+              // }
+              
+              const totalRentDay = util.countRentDuration(req.body.order_date);
+              // console.log(order)
               req.body = {
                      ...req.body,
                      total_rental_days: totalRentDay,
-                     total_price: totalRentDay * order.item_price
+                     total_price: totalRentDay * req.body.item_price
               }
               const result = await Transaction.create(req.body);
               res.status(200).send(result

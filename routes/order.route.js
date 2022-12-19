@@ -1,5 +1,4 @@
 const controller = require("../controllers")
-const middlewares = require('../middlewares')
 
 
 module.exports = function (app) {
