@@ -5,6 +5,7 @@
 module.exports = (date) => {
        let rentDay = new Date(date);
        const currentDate = new Date();
+       console.log(date)
 
        let totalRentHours = currentDate.getHours() - rentDay.getHours();
        let totalRentDay = currentDate.getDay() - rentDay.getDay();

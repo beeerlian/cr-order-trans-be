@@ -64,8 +64,7 @@ exports.delete = async (req, res) => {
                      throw new Error("the transaction you mean is not available")
               }
               const result = await transaction.destroy();
-              res.status(200).send(result
-              );
+              res.status(200).send(result);
        } catch (error) {
               res.status(500).send({
                      message: err.message
@@ -77,20 +76,24 @@ exports.delete = async (req, res) => {
 
 exports.create = async (req, res) => {
        try {
-              // const id = req.body.order_id;
-              // const order = await Order.findByPk(id);
-              // if (!order) {
-              //        throw new Error("the order you mean is not available")
-              // }
-              
-              const totalRentDay = util.countRentDuration(req.body.order_date);
-              // console.log(order)
+              const id = req.body.order_id;
+              const { dataValues: order } = await Order.findOne({
+                     where: { id: id }
+              });
+              console.log("order : ")
+              console.log(order)
+              if (!order) {
+                     throw new Error("the order you mean is not available")
+              }
+
+              const totalRentDay = util.countRentDuration(order.order_date);
               req.body = {
                      ...req.body,
                      total_rental_days: totalRentDay,
-                     total_price: totalRentDay * req.body.item_price
+                     total_price: totalRentDay * order.item_price
               }
               const result = await Transaction.create(req.body);
+              console.log(result)
               res.status(200).send(result
               );
        } catch (err) {
