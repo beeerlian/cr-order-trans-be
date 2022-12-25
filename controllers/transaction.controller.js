@@ -77,27 +77,25 @@ exports.delete = async (req, res) => {
 exports.create = async (req, res) => {
        try {
               const id = req.body.order_id;
-              const { dataValues: order } = await Order.findOne({
+              const order = await Order.findOne({
                      where: { id: id }
               });
               console.log("order : ")
-              console.log(order)
+              console.log(order.dataValues)
               if (!order) {
                      throw new Error("the order you mean is not available")
               }
-
-              const totalRentDay = util.countRentDuration(order.order_date);
+              order.dataValues.done = true
+              await order.save()
+              const totalRentDay = util.countRentDuration(order.dataValues.order_date);
               req.body = {
                      ...req.body,
                      total_rental_days: totalRentDay,
-                     total_price: totalRentDay * order.item_price
+                     total_price: totalRentDay * order.dataValues.item_price
               }
               const result = await Transaction.create(req.body);
-              order.done = true
-              await order.save()
               console.log(result)
-              res.status(200).send(result
-              );
+              res.status(200).send(result);
        } catch (err) {
               res.status(500).send({
                      message: err.message
