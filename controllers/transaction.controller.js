@@ -85,7 +85,6 @@ exports.create = async (req, res) => {
               if (!order) {
                      throw new Error("the order you mean is not available")
               }
-              order.dataValues.done = true
               await order.update({ done: true })
               const totalRentDay = util.countRentDuration(order.dataValues.order_date);
               req.body = {
