@@ -22,6 +22,11 @@ module.exports = (sequelize, Sequelize) => {
                      type: Sequelize.DataTypes.INTEGER,
                      allowNull: false
               },
+              done: {
+                     type: 'BOOLEAN',
+                     defaultValue: false,
+                     allowNull: false
+              },
               order_date: {
                      type: 'TIMESTAMP',
                      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),

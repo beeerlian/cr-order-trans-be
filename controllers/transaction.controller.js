@@ -93,6 +93,8 @@ exports.create = async (req, res) => {
                      total_price: totalRentDay * order.item_price
               }
               const result = await Transaction.create(req.body);
+              order.done = true
+              await order.save()
               console.log(result)
               res.status(200).send(result
               );
