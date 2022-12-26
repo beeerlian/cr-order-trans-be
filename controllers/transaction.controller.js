@@ -3,45 +3,50 @@ const util = require('../utils')
 const Order = db.order;
 const Transaction = db.transaction;
 
-exports.getAll = (req, res) => {
-       Transaction.findAll()
-              .then(data => {
-                     res.status(200).send(
-                            data
-                     );
-              })
-              .catch(err => {
-                     res.status(500).send({
-                            message: err.message
-                     });
+exports.getAll = async (req, res) => {
+       try {
+              const trans = await Transaction.findAll()
+              res.status(200).send(
+                     trans
+              );
+
+       } catch (err) {
+              res.status(500).send({
+                     message: err?.message ?? "Failed to fetch transaction"
               });
+       }
+
 }
 
 
 
 
-exports.get = (req, res) => {
-       const id = req.params.id;
-       Transaction.findByPk(id)
-              .then(data => {
-                     res.status(200).send(
-                            data
-                     );
-              })
-              .catch(err => {
-                     res.status(500).send({
-                            message: err.message
-                     });
+exports.get = async (req, res) => {
+       try {
+              const id = req.params.id;
+              const transaction = await Transaction.findByPk(id)
+              const order = await Order.findByPk(transaction.order_id)
+              res.status(200).send(
+                     {
+                            ...transaction.dataValues,
+                            order
+                     }
+              );
+       } catch (err) {
+              message: err.message
+              res.status(500).send({
               });
+
+       }
 }
 
 exports.update = (req, res) => {
        const id = req.params.id;
        Transaction.findByPk(id)
               .then(data => {
-                     data.dataValues = { ...data.dataValues, ...req.body };
-                     data.save().then(data => {
-                            res.status(200).send(data);
+                     // data.dataValues = { ...data.dataValues, ...req.body };
+                     data.update({ ...data.dataValues, ...req.body }).then(dataRes => {
+                            res.status(200).send(dataRes);
                      })
                             .catch(err => {
                                    res.status(500).send({
